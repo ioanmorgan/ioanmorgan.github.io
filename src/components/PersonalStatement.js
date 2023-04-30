@@ -1,5 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMousePointer } from '@fortawesome/fontawesome-free-solid';
 
 const PseronalStatement = () => {
   return (
@@ -20,6 +21,11 @@ const PseronalStatement = () => {
           <FontAwesomeIcon icon="fa-brands fa-linkedin" />
         </a>
       </p>
+      
+    <div className="conways-hint personal-statement pannel">
+      Feel free to add to the <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game of Life</a> by clicking the background &nbsp;
+      <FontAwesomeIcon icon={ faMousePointer } beat />
+    </div>
       
     </div>
   );

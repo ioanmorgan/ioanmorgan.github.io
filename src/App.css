@@ -54,3 +54,16 @@ body {
   margin-bottom: 10px;
   line-height: 1.6;
 }
+
+.conways-hint {
+  background-color: #bb0aa3;
+  opacity: 0.98;
+  bottom: -50px;
+  right: 0px;
+  left: auto;
+  top: auto;
+  max-width: 500px;
+}
+.conways-hint a{
+  color: #fcf3fb;
+}

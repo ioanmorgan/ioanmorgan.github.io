@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-library.add(fab);
+import { faMousePointer } from '@fortawesome/fontawesome-free-solid';
+library.add(fab, faMousePointer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

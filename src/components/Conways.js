@@ -4,6 +4,8 @@ import React, { useState, useCallback, useEffect } from "react";
  * Figure out how to fit the game on the screen
  */
 // Start from somewhere...somewhere that wont crash the browser due to size
+// Keep in mind widescreens or large high res phones might mean theres a lot
+// more than 80 in 1 direction
 let numRows = 80;
 let numCols = 80;
 // Figure out how that fits the shortest screen dimention
@@ -74,11 +76,24 @@ const Conways = () => {
     const interval = setInterval(() => {
       runSimulation();
     }, 250);
-
+ 
     return () => {
       clearInterval(interval);
     };
   }, [runSimulation]);
+
+  /**
+   * Allow visitors to add Cells...because you know...fun...
+   */
+  const addCells = ((x, y) => {
+    const newGrid = grid;
+    newGrid[y][x] = 1;
+    if(y-1 >= 0) newGrid[y-1][x] = 1;
+    if(y+1 < newGrid.length) newGrid[y+1][x] = 1;
+    if(x-1 >= 0)newGrid[y][x-1] = 1;
+    if(x+1 < newGrid[y].length) newGrid[y][x+1] = 1;
+    setGrid(newGrid);
+  });
 
   return (
     <div className="conways">
@@ -98,6 +113,7 @@ const Conways = () => {
                 backgroundColor: grid[rowIndex][colIndex] ? "#007FFF" : "#B0E0E6",
                 border: "none",
               }}
+              onClick={() => addCells(colIndex, rowIndex)}
             />
           ))
         )}
