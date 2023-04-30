@@ -23,7 +23,7 @@ const PseronalStatement = () => {
       </p>
       
     <div className="conways-hint personal-statement pannel">
-      Feel free to add to the <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life">Game of Life</a> by clicking the background &nbsp;
+      Feel free to add to the <a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Game of Life</a> by clicking the background &nbsp;
       <FontAwesomeIcon icon={ faMousePointer } beat />
     </div>
       
