@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ioanmorgan.com/static/css/main.85749198.css",
-    "main.js": "/ioanmorgan.com/static/js/main.69e7159a.js",
-    "static/js/787.5809834d.chunk.js": "/ioanmorgan.com/static/js/787.5809834d.chunk.js",
-    "index.html": "/ioanmorgan.com/index.html",
-    "main.85749198.css.map": "/ioanmorgan.com/static/css/main.85749198.css.map",
-    "main.69e7159a.js.map": "/ioanmorgan.com/static/js/main.69e7159a.js.map",
-    "787.5809834d.chunk.js.map": "/ioanmorgan.com/static/js/787.5809834d.chunk.js.map"
+    "main.css": "/ioanmorgan.github.io/static/css/main.85749198.css",
+    "main.js": "/ioanmorgan.github.io/static/js/main.34b5119a.js",
+    "static/js/787.5809834d.chunk.js": "/ioanmorgan.github.io/static/js/787.5809834d.chunk.js",
+    "index.html": "/ioanmorgan.github.io/index.html",
+    "main.85749198.css.map": "/ioanmorgan.github.io/static/css/main.85749198.css.map",
+    "main.34b5119a.js.map": "/ioanmorgan.github.io/static/js/main.34b5119a.js.map",
+    "787.5809834d.chunk.js.map": "/ioanmorgan.github.io/static/js/787.5809834d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85749198.css",
-    "static/js/main.69e7159a.js"
+    "static/js/main.34b5119a.js"
   ]
 }
