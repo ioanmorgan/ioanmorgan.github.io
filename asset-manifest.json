@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/personal-website/static/css/main.85749198.css",
-    "main.js": "/personal-website/static/js/main.d8bb3502.js",
-    "static/js/787.5809834d.chunk.js": "/personal-website/static/js/787.5809834d.chunk.js",
-    "index.html": "/personal-website/index.html",
-    "main.85749198.css.map": "/personal-website/static/css/main.85749198.css.map",
-    "main.d8bb3502.js.map": "/personal-website/static/js/main.d8bb3502.js.map",
-    "787.5809834d.chunk.js.map": "/personal-website/static/js/787.5809834d.chunk.js.map"
+    "main.css": "/ioanmorgan.com/static/css/main.85749198.css",
+    "main.js": "/ioanmorgan.com/static/js/main.69e7159a.js",
+    "static/js/787.5809834d.chunk.js": "/ioanmorgan.com/static/js/787.5809834d.chunk.js",
+    "index.html": "/ioanmorgan.com/index.html",
+    "main.85749198.css.map": "/ioanmorgan.com/static/css/main.85749198.css.map",
+    "main.69e7159a.js.map": "/ioanmorgan.com/static/js/main.69e7159a.js.map",
+    "787.5809834d.chunk.js.map": "/ioanmorgan.com/static/js/787.5809834d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85749198.css",
-    "static/js/main.d8bb3502.js"
+    "static/js/main.69e7159a.js"
   ]
 }
