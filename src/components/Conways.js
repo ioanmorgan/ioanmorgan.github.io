@@ -16,6 +16,55 @@ const cellSize = Math.floor(Math.min(windowHeight, windowWidth) / Math.max(numRo
 numRows = Math.floor(windowHeight / cellSize);
 numCols = Math.floor(windowWidth / cellSize);
 
+const tickRate = 350
+
+// Color utilities
+const generateRandomColor = () => {
+  const colors = [
+    '#FF0000', // Red
+    '#00FF00', // Green
+    '#0000FF', // Blue
+    '#FFFF00', // Yellow
+    '#FF00FF', // Magenta
+    '#00FFFF', // Cyan
+    '#FFA500', // Orange
+    '#800080', // Purple
+    '#FF1493', // Deep Pink
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+};
+
+const blendColors = (color1, color2) => {
+  if (!color1) return color2;
+  if (!color2) return color1;
+  
+  // Convert hex to RGB
+  const hexToRgb = (hex) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  };
+  
+  const rgbToHex = (r, g, b) => {
+    return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+  };
+  
+  const rgb1 = hexToRgb(color1);
+  const rgb2 = hexToRgb(color2);
+  
+  if (!rgb1 || !rgb2) return color1;
+  
+  // Blend 50/50
+  const blendedR = Math.round((rgb1.r + rgb2.r) / 2);
+  const blendedG = Math.round((rgb1.g + rgb2.g) / 2);
+  const blendedB = Math.round((rgb1.b + rgb2.b) / 2);
+  
+  return rgbToHex(blendedR, blendedG, blendedB);
+};
+
 /**
  * Set up a random board to kick off the game
  */
@@ -23,7 +72,7 @@ const generateRandomGrid = () => {
   const rows = [];
   for (let i = 0; i < numRows; i++) {
     rows.push(
-      Array.from(Array(numCols), () => (Math.random() > 0.75 ? 1 : 0))
+      Array.from(Array(numCols), () => (Math.random() > 0.75 ? "#007FFF" : null))
     );
   }
   return rows;
@@ -42,6 +91,8 @@ const Conways = () => {
       return g.map((row, rowIndex) => {
         return row.map((cell, colIndex) => {
           let neighbors = 0;
+          let neighborColors = [];
+          
           for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
               if (i === 0 && j === 0) {
@@ -50,15 +101,37 @@ const Conways = () => {
               const x = rowIndex + i;
               const y = colIndex + j;
               if (x >= 0 && x < numRows && y >= 0 && y < numCols) {
-                neighbors += g[x][y];
+                if (g[x][y]) {
+                  neighbors += 1;
+                  neighborColors.push(g[x][y]);
+                }
               }
             }
           }
 
-          if (cell === 1 && (neighbors < 2 || neighbors > 3)) {
-            return 0;
-          } else if (cell === 0 && neighbors === 3) {
-            return 1;
+          if (cell && (neighbors < 2 || neighbors > 3)) {
+            return null; // Cell dies
+          } else if (!cell && neighbors === 3) {
+            // New cell is born - blend colors from neighbors
+            if (neighborColors.length >= 3) {
+              // Blend the first 3 neighbor colors
+              let blendedColor = neighborColors[0];
+              for (let i = 1; i < Math.min(3, neighborColors.length); i++) {
+                blendedColor = blendColors(blendedColor, neighborColors[i]);
+              }
+              return blendedColor;
+            }
+            return generateRandomColor(); // Fallback
+          } else if (cell && neighbors >= 2 && neighbors <= 3) {
+            // Cell survives - blend with neighbors
+            if (neighborColors.length > 0) {
+              let blendedColor = cell;
+              for (const neighborColor of neighborColors) {
+                blendedColor = blendColors(blendedColor, neighborColor);
+              }
+              return blendedColor;
+            }
+            return cell;
           } else {
             return cell;
           }
@@ -75,7 +148,7 @@ const Conways = () => {
 
     const interval = setInterval(() => {
       runSimulation();
-    }, 250);
+    }, tickRate);
  
     return () => {
       clearInterval(interval);
@@ -86,12 +159,16 @@ const Conways = () => {
    * Allow visitors to add Cells...because you know...fun...
    */
   const addCells = ((x, y) => {
-    const newGrid = grid;
-    newGrid[y][x] = 1;
-    if(y-1 >= 0) newGrid[y-1][x] = 1;
-    if(y+1 < newGrid.length) newGrid[y+1][x] = 1;
-    if(x-1 >= 0)newGrid[y][x-1] = 1;
-    if(x+1 < newGrid[y].length) newGrid[y][x+1] = 1;
+    const newColor = generateRandomColor();
+    const newGrid = grid.map(row => [...row]); // Create deep copy
+    
+    // Add cells with the new color
+    newGrid[y][x] = newColor;
+    if(y-1 >= 0) newGrid[y-1][x] = newColor;
+    if(y+1 < newGrid.length) newGrid[y+1][x] = newColor;
+    if(x-1 >= 0) newGrid[y][x-1] = newColor;
+    if(x+1 < newGrid[y].length) newGrid[y][x+1] = newColor;
+    
     setGrid(newGrid);
   });
 
@@ -110,7 +187,7 @@ const Conways = () => {
               style={{
                 width: cellSize,
                 height: cellSize,
-                backgroundColor: grid[rowIndex][colIndex] ? "#007FFF" : "#B0E0E6",
+                backgroundColor: grid[rowIndex][colIndex] || "#B0E0E6",
                 border: "none",
               }}
               onClick={() => addCells(colIndex, rowIndex)}
