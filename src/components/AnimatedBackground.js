@@ -78,6 +78,7 @@ const AnimatedBackground = ({ isDarkMode }) => {
       />
       <div className="animation-controls">
         <div className="animation-selector">
+            Background style
           {ANIMATIONS.map(animation => (
             <button
               key={animation.id}
@@ -88,12 +89,6 @@ const AnimatedBackground = ({ isDarkMode }) => {
             </button>
           ))}
         </div>
-        <button 
-          className="play-pause-btn"
-          onClick={togglePlayPause}
-        >
-          {isPlaying ? '⏸️' : '▶️'}
-        </button>
       </div>
     </>
   );

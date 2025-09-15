@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 const personalStatements = [
   "Guiding teams to deliver,\nwithout the drama.",
@@ -15,11 +16,30 @@ const personalStatements = [
   "From sparks to scale,\nwithout the stress!"
 ];
 
+const workSections = [
+  {
+    title: "Growth companies",
+    description: "Bringing calm, steady leadership to scaling teams.",
+    icon: "📈"
+  },
+  {
+    title: "Startups", 
+    description: "Building early prototypes and guiding engineering from day one.",
+    icon: "🚀"
+  },
+  {
+    title: "Entrepreneurs & adventurers",
+    description: "Turning ideas into working software, fast and reliable.",
+    icon: "💡"
+  }
+];
+
 const PersonalStatement = ({ isDarkMode }) => {
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const currentStatement = personalStatements[currentStatementIndex];
@@ -79,17 +99,52 @@ const PersonalStatement = ({ isDarkMode }) => {
         ))}
         <span className={`cursor ${showCursor ? 'visible' : 'hidden'}`}>_</span>
       </h2>
-      <a
-        href="https://www.linkedin.com/in/ioanamorgan/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="linkedin-button"
+      
+      <button 
+        className="expand-button"
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-label={isExpanded ? "Hide who I work with" : "Show who I work with"}
       >
-        <FontAwesomeIcon icon={faLinkedin} />
-        Connect on LinkedIn
-      </a>
+        <span>Who I Work With</span>
+        <FontAwesomeIcon 
+          icon={isExpanded ? faChevronUp : faChevronDown} 
+          className="expand-icon"
+        />
+      </button>
+
+      <div className={`who-i-work-with ${isExpanded ? 'expanded' : 'collapsed'}`}>
+        <div className="work-list-compact">
+          {workSections.map((section, index) => (
+            <div key={index} className="work-item-compact">
+              <span className="work-icon-small">{section.icon}</span>
+              <span className="work-text-compact">
+                <strong>{section.title}</strong> — {section.description}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+      <div className="contact-buttons">
+        <a
+          href="https://www.linkedin.com/in/ioanamorgan/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="contact-button linkedin"
+        >
+          <FontAwesomeIcon icon={faLinkedin} />
+          LinkedIn
+        </a>
+        <a
+          href="mailto:me@ioanmorgan.com"
+          className="contact-button email"
+        >
+          📧 Email
+        </a>
+      </div>
     </div>
   );
-}
+};
 
 export default PersonalStatement;
