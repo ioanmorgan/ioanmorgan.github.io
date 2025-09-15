@@ -1,69 +1,363 @@
 
-body {
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: rgba(0, 0, 0, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-gradient-start: #ffffff;
+  --text-gradient-end: #e0e0e0;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --button-bg: rgba(255, 255, 255, 0.1);
+  --button-hover: rgba(255, 255, 255, 0.2);
+  --controls-bg: rgba(0, 0, 0, 0.8);
+  --linkedin-bg: #0077b5;
+  --linkedin-hover: #005885;
+  --linkedin-shadow: rgba(0, 119, 181, 0.3);
+  --linkedin-shadow-hover: rgba(0, 119, 181, 0.4);
+}
+
+.light-theme {
+  /* Light theme */
+  --bg-primary: #f8f9fa;
+  --bg-secondary: rgba(255, 255, 255, 0.8);
+  --text-primary: #2c3e50;
+  --text-secondary: #6c757d;
+  --text-gradient-start: #2c3e50;
+  --text-gradient-end: #34495e;
+  --border-color: rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --button-bg: rgba(0, 0, 0, 0.05);
+  --button-hover: rgba(0, 0, 0, 0.1);
+  --controls-bg: rgba(255, 255, 255, 0.9);
+  --linkedin-bg: #0077b5;
+  --linkedin-hover: #005885;
+  --linkedin-shadow: rgba(0, 119, 181, 0.2);
+  --linkedin-shadow-hover: rgba(0, 119, 181, 0.3);
+}
+
+* {
   margin: 0;
-  font-family: 'Calibri', sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
-  margin: 0;
+  height: 100vh;
+  width: 100vw;
 }
 
-.container {
+.App {
   position: relative;
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.conways {
+.animated-background {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  opacity: 0.3;
-}
-
-.pannel {
-  background-color: #003d99;
-  border-radius: 20px;
-  margin: 20px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,0.9);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.4;
 }
 
 .personal-statement {
-  display: block;
-  padding: 10px;
-  max-width: 600px;
-  height: min-content;
-  color: #ddd;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  position: absolute;
-  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 3rem 4rem;
+  max-width: 1000px;
+  margin: 2rem;
+  box-shadow: 0 20px 40px var(--shadow-color);
+  border: 1px solid var(--border-color);
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.personal-statement h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
+.name-heading {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--text-gradient-start), var(--text-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  transition: background 0.3s ease;
 }
 
-.personal-statement p {
+.subheading {
   font-size: 1.5rem;
-  margin-bottom: 10px;
-  line-height: 1.6;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.01em;
+  transition: color 0.3s ease;
 }
 
-.conways-hint {
-  background-color: #c910b0;
-  opacity: 0.98;
-  bottom: -50px;
-  right: 0px;
-  left: auto;
-  top: auto;
-  max-width: 500px;
+/* Profile picture styles */
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 2rem;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
-.conways-hint a{
-  color: #fcf3fb;
+
+/* Typewriter effect styles */
+.typewriter {
+  min-height: 4em; /* Increased height to accommodate longer statements */
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.cursor {
+  font-weight: 300;
+  color: var(--text-primary);
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  transition: color 0.3s ease;
+}
+
+.cursor.visible {
+  opacity: 1;
+}
+
+.cursor.hidden {
+  opacity: 0;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.linkedin-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--linkedin-bg);
+  color: white;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px var(--linkedin-shadow);
+}
+
+.linkedin-button:hover {
+  background: var(--linkedin-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--linkedin-shadow-hover);
+}
+
+.linkedin-button svg {
+  font-size: 1.2rem;
+}
+
+/* Animation Controls */
+.animation-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--controls-bg);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.animation-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.animation-btn {
+  background: var(--button-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.animation-btn:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+.animation-btn.active {
+  background: var(--linkedin-bg);
+  border-color: var(--linkedin-bg);
+  color: white;
+}
+
+.play-pause-btn {
+  background: var(--button-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-pause-btn:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  background: var(--button-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 15px var(--shadow-color);
+}
+
+.theme-toggle:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .personal-statement {
+    padding: 2rem 2.5rem;
+    margin: 1rem;
+  }
+  
+  .name-heading {
+    font-size: 2.5rem;
+  }
+  
+  .subheading {
+    font-size: 1.2rem;
+  }
+  
+  .linkedin-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .animation-controls {
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    left: 10px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+
+  .animation-selector {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .animation-btn {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .personal-statement {
+    padding: 1.5rem 2rem;
+  }
+  
+  .name-heading {
+    font-size: 2rem;
+  }
+  
+  .subheading {
+    font-size: 1rem;
+  }
+
+  .animation-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    top: auto;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .theme-toggle {
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .animation-selector {
+    flex-direction: column;
+    max-height: 200px;
+    overflow-y: auto;
+  }
 }
