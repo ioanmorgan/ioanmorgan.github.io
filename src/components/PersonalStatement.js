@@ -8,7 +8,7 @@ const personalStatements = [
   "Calm leadership.\nReliable engineering.",
   "From code to culture, \nbuilding what lasts.",
   "Turning complexity\ninto calm.",
-  "Building systems,\nSupporting people.",
+  "Building systems,\nsupporting people.",
   "Engineering clarity,\nleadership that lasts.",
   "From ideas to impact\nsmoothly.",
   "Calm hands,\nconfident delivery.",
@@ -34,10 +34,9 @@ const workSections = [
   }
 ];
 
-const PersonalStatement = ({ isDarkMode }) => {
+const PersonalStatement = () => {
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [showCursor, setShowCursor] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -46,7 +45,6 @@ const PersonalStatement = ({ isDarkMode }) => {
     let charIndex = 0;
     
     // Start typing effect
-    setIsTyping(true);
     setDisplayedText('');
     
     const typeInterval = setInterval(() => {
@@ -55,7 +53,6 @@ const PersonalStatement = ({ isDarkMode }) => {
         charIndex++;
       } else {
         clearInterval(typeInterval);
-        setIsTyping(false);
       }
     }, 80); // Slower typing speed
 
@@ -124,7 +121,6 @@ const PersonalStatement = ({ isDarkMode }) => {
           ))}
         </div>
       </div>
-
 
       <div className="contact-buttons">
         <a

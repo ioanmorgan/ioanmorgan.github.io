@@ -367,30 +367,6 @@ body {
   box-shadow: 0 6px 20px var(--shadow-color);
 }
 
-.dynamic-content {
-  min-height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  transition: all 0.4s ease;
-}
-
-.work-content {
-  width: 100%;
-  text-align: center;
-}
-
-.work-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  background: linear-gradient(135deg, var(--text-gradient-start), var(--text-gradient-end));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
 /* Modal Styles */
 .modal-trigger-button {
   background: var(--button-bg);
@@ -618,32 +594,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-.work-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.work-section {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
-  backdrop-filter: blur(5px);
-  transition: all 0.3s ease;
-  text-align: left;
-}
-
-.work-section:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 .work-icon {

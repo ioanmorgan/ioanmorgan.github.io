@@ -24,7 +24,7 @@ function App() {
   return (
     <div className={`App ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
       <AnimatedBackground isDarkMode={isDarkMode} />
-      <PersonalStatement isDarkMode={isDarkMode} />
+      <PersonalStatement />
       <button 
         className="theme-toggle"
         onClick={toggleTheme}
